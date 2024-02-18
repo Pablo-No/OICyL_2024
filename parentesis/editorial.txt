@@ -1,0 +1,61 @@
+Solución:
+
+Primero vamos a hacer una simplificación del problema
+gracias a las siguientes observaciones:
+
+- Un paréntesis solo afecta a la suma si está situado justo después
+de un signo menos.
+- Si delante de un signo menos no hay un paréntesis lo podemos añadir
+sin cambiar la suma. a + b - c + d = a + b - ( c ) + d
+
+Gracias a estas observaciones vemos que cada combinación de paréntesis
+es equivalente a alguna en la que haya exactamente un paréntesis de apertura
+delante de cada signo menos y que éstos sean los únicos paréntesis de apertura.
+
+Para resolver este problema usaremos Programación Dinámica.
+
+En la programación dinámica almacenamos una serie de valores sobre casos
+pequeños que usamos para resolver casos grandes.
+
+En nuestro problema el estado va a ser el número de números considerados
+desde la izquierda y la suma total obtenida.
+
+En cada estado vamos a almacenar el número máximo de paréntesis sin cerrar
+que podemos lograr tener abiertos habiéndo colocado exactamente un paréntesis
+de apertura. Vemos que ese número es el más relevante porque cerrando inmediatamente
+cualquier número de paréntesis podemos obtener cualquier configuración con
+un número de paréntesis entre 0 y el máximo.
+
+Solo consideramos los paréntesis abiertos colocados inmediatamente
+después de un signo menos, pues son los únicos que afectan.
+
+Ahora queda considerar las transiciones, que son los pasos que se utilizan
+para resolver casos grandes a partir de pequeños.
+
+Las dos posibilidades en una transición son:
+
+- No cerrar ningún paréntesis.
+- Si hay al menos un paréntesis abierto, cerrar exactamente 1.
+(vemos que cerrar 2 es lo mismo que no cerrar ninguno y es peor).
+
+Vemos que esas transiciones son las únicas.
+
+Para obtener la respuesta final hay que ver a cuántos posibles valores
+se puede llegar con cualquier número de paréntesis abiertos restantes.
+
+Análisis de la complejidad:
+
+Como hay O(n) paréntesis y O(n*m) posibles sumas habrá O(n^2*m) posibles estados.
+Como en cada estado se hace un número constante O(1) de transiciones en total
+la complejidad será O(n^2*m).
+
+Alternativamente se puede hacer una dp similar pero en la que el estado sea la
+terna (índice a considerar, paréntesis abiertos, suma total) en la que almacenamos
+si es posible alcanzar el valor, ésta DP es mucho más fácil de implementar, pero
+la complejidad será O(n^3*m) por lo que necesitará un poco de optimización para
+ser aceptada (ver sol_2.cpp).
+
+REFERENCIAS:
+
+Para aprender más sobre programación dinámica:
+https://es.wikipedia.org/wiki/Programaci%C3%B3n_din%C3%A1mica

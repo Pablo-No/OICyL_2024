@@ -1,0 +1,27 @@
+Solución:
+
+Simplemente hay que seguir las instrucciones del enunciado.
+
+Sin embargo hay varias cosas con las que hay que tener cuidado
+que merecen la pena mencionar:
+
+- Hay que leer líneas completas e ignorar espacios.
+Se puede ver en caso de los ejemplos.
+
+- Hay que leer varias líneas y manener el offset.
+Por lo tanto tendremos que mantener una variable fuera
+del bucle que cuente el número de letras totales.
+
+- Hay que evitar overflows.
+NO se puede sumar directamente números a chars ya que éstos almacenan
+valores entre 0 y 255 y por tanto no van a poder ser usados para mantener
+variables como el offset. Por eso antes de cada operación hay que pasar
+todas las variables al tipo int.
+
+Teniendo cuidado con todo ello se consigue resolver el problema.
+
+REFERENCIAS:
+
+Para más información sobre el cifrado XOR:
+https://es.wikipedia.org/wiki/Cifrado_XOR (versión en español)
+https://en.wikipedia.org/wiki/XOR_cipher (versión en inglés con más contenido)

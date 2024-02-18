@@ -1,0 +1,8 @@
+v = int(input())
+l = int(input())
+r = int(input())
+if (v >= r): print("A")
+elif ((v-l)*100 >= (r-l)*60): print("B")
+elif ((v-l)*100 > (r-l)*40): print("C")
+elif (v > l): print("D")
+else: print("E")

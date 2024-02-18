@@ -1,0 +1,6 @@
+- sol.cpp Solución correcta en C++, complejidad O(n*log(n)).
+- sol.py Solución correcta en Python, complejidad O(n*log(n)).
+- sol_2.py Solución correcta en Python, complejidad O(n^(4/3)).
+- slow.cpp Solución lenta (debiera dar TLE) en C++,
+complejidad O(n^2*log(n)).
+

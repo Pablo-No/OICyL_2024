@@ -1,0 +1,14 @@
+Solución:
+
+Tras leer el enunciado vemos que podemos hacer lo siguiente:
+
+- Crear dos listas, una para cada tipo de ordenadores.
+- Leer los ordenadores uno a uno.
+- Dependiendo de la antiguedad, añadirlo al final de la lista
+de actualizar o de retirar.
+- Imprimir las cadenas de texto "ACTUALIZAR" y "RETIRAR" seguidas
+de los ordenadores de cada lista en órden.
+
+La solución imprime las listas en el órden correcto pues al leer
+la entrada en órden los órdenadores serán introducidos en las listas
+en órden.

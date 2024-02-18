@@ -1,0 +1,6 @@
+- sol.cpp Solución correcta utilizando Dijkstra con cola de prioridad en C++,
+complejidad O(n^2*log(n)).
+- sol.py Solución correcta utilizando Dijkstra con cola de prioridad en C++,
+complejidad O(n^2*log(n)).
+- sol_2.cpp Solución alternativa utilizando Bellman-Ford en C++,
+complejidad O(n^4).

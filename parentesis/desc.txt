@@ -1,0 +1,3 @@
+- sol.cpp Solución correcta en C++, complejidad O(n^2*m).
+- sol.py Solución correcta en Python, complejidad O(n^2*m).
+- sol_2.cpp Solución alternativa en C++, O(n^3*m).

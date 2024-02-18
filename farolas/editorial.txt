@@ -1,0 +1,26 @@
+Solución:
+
+El enunciado nos deja entender que queremos ver el rango en el que cae
+(luzambiental-min)/(max-min)
+
+Podemos hacer directamente eso y obtendremos la máxima puntuación.
+
+Sin embargo, surgen algunos problemas con esa manera de hacerlo.
+En programación, si es posible, NUNCA hay que dividir.
+Al dividir utilizamos números de coma flotante cuya precisión es finita
+y que se pueden comportar de forma sorprendente.
+Un famoso ejemplo es que 0.1 + 0.2 == 0.3 se evalúa a falso en la mayoría
+de implementaciones de coma flotante.
+
+En nuestro problema cada comparación del tipo:
+(luzambiental-min)/(max-min) >= b/100
+
+La podemos convertir en:
+(luzambiental-min)*100 >= (max-min)*b
+
+Solo habría que tener cuidado en C++ usando long long para evitar overflows.
+
+REFERENCIAS:
+
+Para aprender más sobre la coma flotante:
+https://es.wikipedia.org/wiki/Coma_flotante

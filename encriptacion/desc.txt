@@ -1,0 +1,2 @@
+- sol.cpp Solución correcta en C++.
+- sol.py Solución correcta en Python.

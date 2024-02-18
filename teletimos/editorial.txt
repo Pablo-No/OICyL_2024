@@ -1,0 +1,12 @@
+Solución:
+
+Tras leer el enunciado vemos que podemos hacer lo siguiente:
+
+- Si el número tiene tamaño distinto a nueve imprimimos "otros".
+- Si no, si el núemero comienza por los prefijos de pago imprmimos "$$$".
+- Si no, si el número comienza por prefijos de fijos imprimimos "fijo".
+- Si no, si el número comienza por prefijos de móvil imprimimos "móvil".
+- Si no imprimimos "otros".
+
+Es fácil ver que este órden de comprobaciones cumple lo dicho por el enunciado
+y devolverá la respuesta correcta.

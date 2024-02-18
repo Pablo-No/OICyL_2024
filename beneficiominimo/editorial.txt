@@ -1,0 +1,189 @@
+Solución:
+
+Tras leer el enunciado y simplificarlo podemos obtener el
+siguiente problema alternativo (ligeramente más general) que
+es el que vamos a resolver.
+
+Tenemos dos pizarras, en cada operación podemos hacer lo siguiente:
+- Escribir un número en la primera pizarra.
+- Borrar un número de la primera pizarra.
+- Escribir un número en la segunda pizarra.
+- Borrar un número de la segunda pizarra.
+Tras cada operación hay que devolver el mínimo valor no negativo de
+(a-b) donde a es un número de la primera pizarra y b es un número de
+la segunda pizarra. Lo llamaremos resultado de las pizarras.
+
+La reducción al problema es que para cada v_i añadido vamos a:
+- Escribir b*v_i en la primera pizarra.
+- Escribir a*v_i+1 en la segunda pizarra.
+Y para cada v_i eliminado vamos a:
+- Borrar b*v_i en la primera pizarra.
+- Borrar a*v_i+1 en la segunda pizarra.
+Y para saber la respuesta vamos a devolver el resultado de las pizarras
+incrementado en una unidad.
+
+Para simplificar el análisis, si almacenamos el número de veces
+que hemos añadido v_i y el número de veces que lo hemos quitado
+podemos añadirlo solo cuando se añada por primera vez y borrarlo
+solo cuando se haya quitado tantas veces como se haya añadido.
+
+A partir de ahora podemos asumir que no hay números repetidos en
+ninguna de las pizarras.
+
+Ahora resolvamos el problema de las pizarras:
+
+Imaginemos que tenemos una lista con todos los números de ambas pizarras
+con la pizarra en la que aparecen ordenados de menor a mayor.
+Llamemos a esta lista la lista de las pizarras.
+
+Llamemos a la primera pizarra A y a la segunda B.
+
+En un empate pondremos a un número con la letra B primero.
+
+Veamos un ejemplo de lista:
+
+(1,A) (2,B) (4,A) (6,B) (6,A)
+
+Vemos que en este caso el resultado de las pizarras es 0 y corresponde
+a las parejas (6,B) y (6,A), que aparecen de forma consecutiva.
+
+Vamos a demostrar que ésto no es casualidad:
+
+LEMA:
+El resultado de una pizarra corresponde a dos elementos consecutivos
+de la lista de las pizarras donde el primero es (x,B) y el segundo es (y,A)
+para algunos x, y. En este caso la respuesta será (y-x).
+
+DEMOSTRACIÓN:
+Primero vemos que para esa pareja la resta de los valores a considerar
+es (y-x) ya que x está en la segunda pizarra (B) e y en la primera (A).
+
+Luego vemos que si una pareja de números (posiblemente no seguidos)
+forma una resta positiva si y solo sí el primero en el órden de la lista
+es (x,B) y el segundo (y,A) pues si no se cumple entonces x > y,
+lo cual lleva a (y-x)<0, contradicción. Y sí se cumple entonces
+y >= x, que implica (y-x)>= 0, como queríamos.
+
+Ahora vamos a demostrar por reducción al absurdo que la solución
+óptima (de existir solución) está formada por elementos consecutivos.
+
+Para ello supongamos que no es así, ya hemos demostrado que el primero
+en la lista es (x,B) y el segundo (y,A).
+
+Hay dos casos.
+
+- Entre (x,B) e (y,A) hay un elemnto (z,A) en la lista:
+Es imposible pues entonces (z < y) y (y-x)>(z-x)>=0 .
+
+- Entre (x,B) e (y,A) hay un elemento (z,B) en la lista:
+Es imposible pues entonces (z > x) y (y-x)>(y-z)>=0 .
+
+Por lo tanto es imposible que no estén seguidos y deberán estar seguidos,
+como queríamos demostrar.
+FIN DE LA DEMOSTRACIÓN.
+
+Ahora vamos a usar este LEMA para hacer una solución eficiente.
+
+La solución es manter la lista de las pizarras y cada día devolver
+la diferencia más pequeña entre elementos consecutivos de la forma
+(x,B) e (y,A) en ese órden.
+
+Sin embargo, ordenar la lista en cada paso puede ser muy lento.
+
+Para ello usaremos una estructura de datos que sea capaz de realizar
+inserciones en tiempo logarítmico, esa estructura es un set ordenado,
+set de la STL de C++. Llamemos a este set set de opciones.
+Conceptualmente esta estructura es un árbol binario de búsqueda
+auto-balanceable, aunque para éste problema, se puede utilizar
+como una caja negra.
+(Para Python, donde esa estructura no viene incluida en la librería
+estándar, ver los comentarios al final).
+
+Sin embargo nuestra solución sigue siendo lenta (de hecho esta solución
+es la que viene incluida en brute.cpp). El problema es que necesitamos
+recorrer el set cada vez que necesitemos la diferencia más pequeña de
+elementos consecutivos.
+
+Para ello vamos a mantener todas las diferencias de elementos consecutivos
+en un set. Llamemos a éste set set de diferencias.
+
+Las diferencias serán (y-x) si (x,B) e (y,A) son elementos consecutivos
+en ese órden, si no, no se insertará nada.
+
+¿En qué nos ayuda ésto?
+
+RESPUETA:
+Porque al añadir un elemento solo hay que hacer tres operaciones.
+
+Las letras a, b, c van a representar parejas (x, A) o (x, B)
+del set de opciones.
+
+OPERACIONES AL INSERTAR B
+Primero hacemos una recorrido del set de opciones para ver entre
+que elementos a y c hay que insertar b.
+Hacemos esto:
+1. Eliminamos la diferencia entre a y c del set de diferencias.
+2. Añadimos la diferencia entre a y b al set de diferencias.
+3. Añadimos la diferencia entre b y c al set de diferencias.
+Por último insertamos b en el set de opciones.
+
+OPERACIONES AL ELIMINAR B
+Para eliminar un elemento se hace de manera similar:
+Primero hacemos un recorrido del set de opciones para encontrar los
+elementos a los lados de b en el set de opciones.
+1. Eliminamos la diferencia entre a y b del set de diferencias.
+2. Eliminamos la diferencia entre b y c del set de diferencias.
+3. Insertamos la diferencia entre a y c del set de diferencias.
+Por último eliminamos b en el set de opciones.
+
+HALLAR EL RESULTADO DE LAS PIZARRAS
+Recorremos el set de diferencias y devolvemos la mínima diferencia.
+
+Hay algunos detalles que se han omitido como qué sucede si b está en
+un extremo de la lista o que puede haber elementos repetidos en el set
+de diferencias, pero éstos son sencillos de manejar y no se van a discutir.
+
+Tras un rápido análisis vemos que estas operaciones son todas logarítmicas,
+es decir, O(log(m)) donde m es el tamaño de los árboles.
+
+Como hay n días en cada día se añade un elemento el tamaño máximo de los árboles
+es O(n) y la solución es O(n*log(n)) que pasa los límites de tiempo.
+
+REFERENCIAS:
+
+El problema está inspirado en:
+https://atcoder.jp/contests/abc308/tasks/abc308_g (en inglés)
+
+Aprender más sobre árboles binarios de búsqueda auto-balanceables:
+https://es.wikipedia.org/wiki/%C3%81rbol_binario_de_b%C3%BAsqueda_auto-balanceable
+
+NOTAS PARA PYTHON:
+
+Como parte del proceso para preparar el problema se requiere desarrollar
+una solución tanto en C++ como en Python. La falta de un árblol binario
+de búsqueda auto-balanceable en la librería estándar de Python ha complicado
+el desarrollo del problema. Se ha decidido dar un márgen de tiempo amplio
+a Python para implementaciones subóptimas y se han realizado las siguientes
+dos soluciones.
+
+-sol_2.py Esta solución utiliza la librería Sorted_list que trabaja en
+O(n^(1/3)) en vez de en O(log(n)) por operación pero con una constante muy
+baja. Esto permite que implementaciones de otras estructuras de datos similares
+sean aceptadas.
+
+Documentación de Sorted List:
+https://grantjenks.com/docs/sortedcontainers/sortedlist.html
+
+-sol.py Esta solución utiliza estructuras de datos para sustituir a los sets
+hechas a mano.
+
+En concreto:
+- El set de diferencias es sustituido por una priority queue y un
+array de frecuencias de todos los valores que trabaja en un tiempo de O(log(n))
+amortizado.
+
+- El set de opciones se implementa con un Fenwick Tree con compresión
+de coordenadas que trabaja en un tiempo O(log(n)).
+
+De hecho sol.py tiene menos líneas de código que sol.cpp,
+lo que demuestra viabilidad.

@@ -1,0 +1,14 @@
+Solución:
+
+Tras leer el enunciado vemos que podemos hacer lo siguiente:
+
+- Guardamos en cada paso la string más similar a la secuencia inicial,
+empieza siendo la primera.
+- Por cada paso, vemos si la nueva string es estríctamente más similar
+a la secuencia inicial que la almacenada mejor.
+- Si es estríctamente mejor sustituímos la string guardada con la nueva.
+- Como leemos las string en órden, siempre devolveremos la primera más
+similar entre varias igualmente similares.
+
+Como comararemos en total O(n) strings y un par de strings se puede comparar
+en O(|s|) la complejidad total será O(n*|s|)

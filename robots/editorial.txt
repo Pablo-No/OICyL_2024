@@ -1,0 +1,24 @@
+Solución:
+
+Se pide resolver el problema de el camino más corto entre dos puntos en un grafo
+con forma de cuadrícula.
+
+Para ello podemos utilizar el algoritmo Dijkstra que es capaz de resolver el problema
+del camino más corto partiendo desde un punto a cualquier punto en O((a+b)*log(a))
+siendo a el número de vértices del grafo y b el número de aristas del grafo.
+
+Como a = O(n^2) y b = O(n^2) entonces el algoritmo tiene una complejidad total de
+O((n^2)*log(n)).
+
+Alternativamente se puede usar Bellman-Ford para resolver el problema.
+La complejidad será O(n^4) (con constante muy baja y poca probabilidad
+del peor caso), por lo que requerirá bastante optimización para entrar
+en tiempo (ver sol_2.cpp).
+
+REFERENCIAS:
+
+Para aprender más sobre el algoritmo Dijkstra:
+https://es.wikipedia.org/wiki/Algoritmo_de_Dijkstra
+
+Para aprender más sobre el algoritmo Bellman-Ford
+https://es.wikipedia.org/wiki/Algoritmo_de_Bellman-Ford
