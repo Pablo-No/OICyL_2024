@@ -160,7 +160,7 @@ https://es.wikipedia.org/wiki/%C3%81rbol_binario_de_b%C3%BAsqueda_auto-balanceab
 NOTAS PARA PYTHON:
 
 Como parte del proceso para preparar el problema se requiere desarrollar
-una solución tanto en C++ como en Python. La falta de un árblol binario
+una solución tanto en C++ como en Python. La falta de un árbol binario
 de búsqueda auto-balanceable en la librería estándar de Python ha complicado
 el desarrollo del problema. Se ha decidido dar un márgen de tiempo amplio
 a Python para implementaciones subóptimas y se han realizado las siguientes
