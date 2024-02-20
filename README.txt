@@ -2,6 +2,9 @@ En este proyecto podéis encontrar mis soluciones a los problemas
 de la cuarta OICYL, celebrada el 17 de febrero de 2024 en
 Castilla y León de manera multisede.
 
+Los problemas se pueden encontrar en este enlace:
+https://www.hackerrank.com/oicyl-2024-abierto
+
 Las soluciones no son oficiales (salvo para beneficio mínimo,
 de la cual soy el autor). Estas soluciones pasan todos los
 juegos de prueba generados.
